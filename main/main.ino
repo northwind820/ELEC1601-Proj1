@@ -3,14 +3,14 @@
 // declare servos
 Servo servoLeft;
 Servo servoRight;
-LServo = ;
-RServo = ;
+int LServo = 13;
+int RServo = 12;
 
 // declare pins
-LSensor = ;
-LReceiver = ;
-RSensor = ;
-RReceiver = ;
+int LSensor = 9;
+int LReceiver = 10;
+int RSensor = 2;
+int RReceiver = 3;
 
 // functions
 void forward()
@@ -37,7 +37,7 @@ void turnLeft()
     servoRight.writeMicroseconds(1300);
 }
 
-void stop()
+void stop_car()
 {
     servoLeft.writeMicroseconds(1500);
     servoRight.writeMicroseconds(1500);
@@ -50,9 +50,9 @@ void setup()
     Serial.begin(9600);
 
     // sensors
-    pinMode(LSensor, INPUT);
+    pinMode(LSensor, OUTPUT);
     pinMode(LReceiver, INPUT);
-    pinMode(RSensor, INPUT);
+    pinMode(RSensor, OUTPUT);
     pinMode(RReceiver, INPUT);
 
     // servos
@@ -60,8 +60,14 @@ void setup()
     servoRight.attach(RServo);
 
 }
-
+ 
 void loop()
 {
-
+  int left = digitalRead(LReceiver);
+  int right = digitalRead(RReceiver);
+  Serial.print("Left:");
+  Serial.println(left);
+  Serial.print("Right:");
+  Serial.println(right);
+  delay(1000);
 }
